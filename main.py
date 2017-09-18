@@ -3,26 +3,39 @@ Created on 2017. 8. 4.
 
 @author: em
 '''
-
+ 
 import matplotlib.pyplot as plt
-import numpy as np
-import math as m
-
-rf = open("./sample.txt",'r')
-wf = open("./sample2.txt",'w')
-
-lhs = rf.readline()
-cnt = 0
-while lhs:
-    t = cnt / 10
-    y1 = m.sin(t)
-    y2 = m.cos(t)
-    line = lhs[:-1] + ',' + str( abs(int(round(y1*100))) ) + ',' + str( abs(int(round(y2*100))) )+'\n'
-    wf.writelines(line)
-
-    print(line)
-    lhs = rf.readline()
-    cnt += 1
-    
-rf.close()
-wf.close()
+import myfunction as my
+from matplotlib.pyplot import figure
+from cmath import sqrt
+ 
+list1 = list()
+list2 = list()
+list3 = list()
+fig = figure()
+with open("./EMGsample.txt", 'r') as rf:
+    print("")
+    data = [0, 0, 0, 0]
+    i = 0
+    while True:
+        i += 1
+        line = rf.readline()
+        if not line:
+            break
+        if i == 20000:
+            break
+         
+        raw = line.split('\t')
+        data = [value for value in raw]
+        mav = my.mav(float(data[0]))
+        sd = my.sd(float(data[0]))
+        list1 = list1+[data[0]]
+        list2 = list2+[mav]
+        list3 = list3+[sd]
+         
+        
+    plt.plot(list1)
+    plt.plot(list2)
+    plt.plot(list3)
+ 
+    plt.show()
