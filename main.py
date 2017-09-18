@@ -7,7 +7,6 @@ Created on 2017. 8. 4.
 import matplotlib.pyplot as plt
 import myfunction as my
 from matplotlib.pyplot import figure
-from cmath import sqrt
  
 list1 = list()
 list2 = list()
